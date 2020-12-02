@@ -1,30 +1,42 @@
 const express = require('express')
 const app = express()
+// module de creation de documentation
+// https://www.npmjs.com/package/swagger-ui-express
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./bin/config/swagger');
 // https://www.npmjs.com/package/morgan
 // permet d'avoir un debug en console
 const morgan = require('morgan')('dev')
 // require des fonctions {utilisateur}
-const { success, error, checkAndChange } = require('./assets/function')
+const { success, error, checkAndChange } = require('./bin/utils/function')
 // fichier de configuration
-const config = require('./assets/config')
+const config = require('./bin/config/config')
 const bodyparser = require('body-parser')
 const mysql = require('promise-mysql')
 
 const db = mysql.createConnection({
     host: config.db.host,
     database: config.db.database,
+    port: config.db.port,
     user: config.db.user,
     password: config.db.password
 }).then((db) => {
-    console.log('Connected to MYSQL');
+    console.log('Connected to MYSQL :)');
     // middleware
     app.use(morgan)
     app.use(bodyparser.json())
     app.use(bodyparser.urlencoded({ extended: true }))
+    
+    // swagger ui doc api
+    let customCssSwagger = {
+        customCss: `.swagger-ui .topbar { display: none }`
+    };
+    app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, customCssSwagger));
+ 
 
     // class Members
     let MembersRouter = express.Router()
-    let Members = require('./assets/classes/Members')(db, config)
+    let Members = require('./bin/class/Members')(db, config)
 
     /* --------------------------------- routes --------------------------------- */
     MembersRouter.route('/:id')
@@ -55,7 +67,7 @@ const db = mysql.createConnection({
             res.json(checkAndChange(addMember))
         })
 
-    app.listen(config.port, () => console.log('Started on port ' + config.port))
+    app.listen(config.port, () => console.log('- Started on port ' + config.port, ': http://localhost:' + config.port) + console.log('- DOCS API on : ' + 'http://localhost:' + config.port + '/docs'))
     app.use(config.rootAPI + 'members', MembersRouter)
 }).catch((err) => {
     console.log('erreur => ', err.message);

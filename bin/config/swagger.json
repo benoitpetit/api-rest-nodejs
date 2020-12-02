@@ -1,0 +1,127 @@
+{
+    "definitions": {
+      
+    },
+    "info": {
+      "title": "API REST documentation",
+      "version": "1.0.0",
+      "license": {
+        "name": "MIT"
+      },
+      "description": "API REST de gestion de membres en nodejs"
+    },
+    "basePath": "/api/",
+    "host": "localhost:3000",
+    "paths": {
+      "/members/{id}": {
+        "get": {
+          "summary": "members/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {
+            
+          },
+          "tags": [
+            "member"
+          ]
+        },
+        "put": {
+          "summary": "members/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {
+            
+          },
+          "tags": [
+            "member"
+          ]
+        },
+        "delete": {
+          "summary": "members/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {
+            
+          },
+          "tags": [
+            "member"
+          ]
+        }
+      },
+      "/members": {
+        "get": {
+          "summary": "members",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "max",
+              "in": "query",
+              "required": false
+            }
+          ],
+          "responses": {
+            
+          },
+          "tags": [
+            "members"
+          ]
+        },
+        "post": {
+          "summary": "members",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "name",
+              "in": "body",
+              "required": true
+            }
+          ],
+          "responses": {
+            
+          },
+          "tags": [
+            "members"
+          ]
+        }
+      }
+    },
+    "swagger": "2.0",
+    "tags": [
+      {
+        "name": "members",
+        "description": "Methodes de gestion des membres"
+      },
+      {
+        "name":"member",
+        "description":"Methodes de gestion d'un membre"
+      }
+    ]
+  }

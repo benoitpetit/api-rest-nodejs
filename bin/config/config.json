@@ -1,11 +1,12 @@
 {
-    "rootAPI": "/api/v1/",
+    "rootAPI": "/api/",
     "port": 3000,
     "db": {
-        "host": "localhost",
-        "database": "api_rest_nodejs",
-        "user": "XXXX",
-        "password": "XXXX"
+        "host": "192.168.0.50",
+        "port": "6603",
+        "database": "node",
+        "user": "node",
+        "password": "UGe1cES1SCvXVzFx"
     },
     "errors": {
         "wrongID": "It's a wrong id",
